@@ -1,0 +1,48 @@
+<div id="layoutSidenav_nav">
+  <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+      <div class="sb-sidenav-menu">
+          <div class="nav">
+              <a class="nav-link" href="/">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-tachometer-alt"></i>
+                </div>
+                Özet Panel
+              </a>
+              <a class="nav-link" href="/firmalar">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-chart-area"></i>
+                </div>
+                Firmalar
+              </a>
+              <a class="nav-link" href="/satislar">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-table"></i>
+                </div>
+                Satışlar
+              </a>
+              <a class="nav-link" href="/alislar">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-table"></i>
+                </div>
+                Alışlar
+              </a>
+              <a class="nav-link" href="/tahsilatlar">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-table"></i>
+                </div>
+                Tahsilatlar
+              </a>
+              <a class="nav-link" href="/odemeler">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-table"></i>
+                </div>
+                Ödemeler
+              </a>
+          </div>
+      </div>
+      <div class="sb-sidenav-footer">
+          <div class="small">Kullanıcı:</div>
+          {{ auth.user.ad_soyad }}
+      </div>
+  </nav>
+</div>
