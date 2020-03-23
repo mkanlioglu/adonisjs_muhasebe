@@ -32,7 +32,7 @@ Route.post('password/email', 'Auth/PasswordResetController.sendResetLinkEmail')
 Route.get('password/reset/:token', 'Auth/PasswordResetController.showResetForm')
 Route.post('password/reset', 'Auth/PasswordResetController.reset')
 
-Route.get('firmalar','FirmaController.index')
+Route.get('firmalar','FirmalarController.index').middleware(['auth'])
 Route.get('satislar','SatislarController.index')
 Route.get('alislar','AlislarController.index')
 Route.get('tahsilatlar','Tahsilatlarontroller.index')

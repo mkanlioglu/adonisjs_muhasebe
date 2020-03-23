@@ -1,8 +1,13 @@
 'use strict'
+const Firmalar = use('App/Models/Firmalar')
 
 class FirmalarController {
-    index(){
-        
+    async index({ view }){
+        const firmalar = await Firmalar.all();
+        return view.render('firmalar',{
+            baslik: "Firmalar",
+            firmalar:firmalar.toJSON()
+        })        
     }
 }
 
