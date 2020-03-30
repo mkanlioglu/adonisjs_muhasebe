@@ -1,7 +1,14 @@
 @layout('layout.app')
 
 @section('content')
-  <p>
-    Hoşgeldin <strong>{{ auth.user.ad_soyad }}</strong>!
-  </p>
+<div class="card mb-4 mt-3">
+  <div class="card-header"><i class="fas fa-chart-area mr-1"></i>
+    {{ baslik }}
+  </div>
+  <div class="card-body">
+    <p>
+      Hoşgeldin <strong>{{ auth.user.ad_soyad }}</strong>!
+    </p>
+  </div>
+</div>
 @endsection

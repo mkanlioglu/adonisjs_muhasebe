@@ -1,44 +1,84 @@
-@layout('layout.app')
-
-@section('baslik')
-{{ baslik }}
-@endsection
-
-@section('content')
-<div class="table-responsive">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-            </tr>
-        </tfoot>
-        <tbody>
-            @each(firma in firmalar)
-                <tr>
-                    <td>{{ firma.firma_adi }}</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-            @endeach
-        </tbody>
-    </table>
-</div>
-@endsection
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Muhasebe Sistemi</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+    @include('layout.navbar')
+    <div id="layoutSidenav">
+        @include('layout.sidebar')
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid">
+                    <div class="card mb-4 mt-3">
+                        <div class="card-header"><i class="fas fa-chart-area mr-1"></i>
+                            {{ baslik }}
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Firma Adı</th>
+                                        <th>Vergi Dairesi</th>
+                                        <th>Vergi No</th>
+                                        <th>İş Tel</th>
+                                        <th>Cep Tel</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @each(firma in data.data)
+                                      <tr>
+                                        <td>{{ firma.id }}</td>
+                                        <td>{{ firma.firma_adi }}</td>
+                                        <td>{{ firma.vergi_dairesi }}</td>
+                                        <td>{{ firma.vergi_no }}</td>
+                                        <td>{{ firma.is_tel }}</td>
+                                        <td>{{ firma.cep_tel }}</td>
+                                      </tr>
+                                    @endeach
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example">
+                              <ul class="pagination justify-content-end">
+                                @if(onceki > 0)
+                                  <li class="page-item">
+                                    <a class="page-link" href="http://localhost:3333/firmalar" tabindex="-1">İlk</a>
+                                  </li>
+                                <li class="page-item">
+                                  <a class="page-link" href="http://localhost:3333/firmalar?page={{ onceki }}" tabindex="-1">Önceki</a>
+                                </li>
+                                  <li class="page-item"><a class="page-link" href="http://localhost:3333/firmalar?page={{ onceki }}">{{ onceki }}</a></li>
+                                @endif
+                                <li class="page-item active"><a class="page-link" href="http://localhost:3333/firmalar?page={{ data.page }}">{{ data.page }}</a></li>
+                                @if(sonraki>0)
+                                  <li class="page-item"><a class="page-link" href="http://localhost:3333/firmalar?page={{ sonraki }}">{{ sonraki }}</a></li>
+                                  <li class="page-item">
+                                    <a class="page-link" href="http://localhost:3333/firmalar?page={{ sonraki }}">Sonraki</a>
+                                  </li>
+                                  <li class="page-item">
+                                    <a class="page-link" href="http://localhost:3333/firmalar?page={{ last }}" tabindex="-1">Son</a>
+                                  </li>
+                                @endif
+                              </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    {{ script('https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js') }}
+    {{ script('js/scripts.js') }}
+</body>
+</html>

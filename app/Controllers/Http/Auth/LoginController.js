@@ -11,7 +11,6 @@ class LoginController {
   async login ({ request, auth, session, response }) {
     
     const { username, password, remember } = request.all()
-    console.log(username);
     
     const user = await User.query()
       .where('username', username)

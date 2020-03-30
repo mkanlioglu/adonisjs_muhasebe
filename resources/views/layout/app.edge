@@ -12,48 +12,18 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-      @loggedIn
+      
         @include('layout.navbar')
         <div id="layoutSidenav">
             @include('layout.sidebar')
             <div id="layoutSidenav_content">
               <main>
                   <div class="container-fluid">
-                      <div class="card mb-4 mt-3">
-                            <div class="card-header"><i class="fas fa-chart-area mr-1"></i>
-                                @!section('baslik')
-                            </div>
-                            <div class="card-body">
-                                @!section('content')
-                            </div>
-                          <div class="card-footer small text-muted">23.03.2020</div>
-                      </div>
+                    @!section('content')
                   </div>
               </main>
-              <footer class="py-4 bg-light mt-auto">
-                  <div class="container-fluid">
-                      <div class="d-flex align-items-center justify-content-between small">
-                          <div class="text-muted">Copyright &copy; Muhasebe Sistemi 2020</div>
-                          <div>
-                              <a href="#">Gizlilik Politikası</a>
-                              &middot;
-                              <a href="#">Şartlar &amp; Kurallar</a>
-                          </div>
-                      </div>
-                  </div>
-              </footer>
           </div>
         </div>
-        @else
-        @!section('content')
-        @endloggedIn
-        
-        {{ script('https://code.jquery.com/jquery-3.4.1.min.js') }}
-        {{ script('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js') }}
-        {{ script('js/scripts.js') }}
-        {{ script('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js') }}
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-        {{ script('js/datatables-demo.js') }}
-    </body>
-</html>
+             
+@include('layout.footer')
+</body>
