@@ -31,18 +31,16 @@ Route.get('password/reset', 'Auth/PasswordResetController.showLinkRequestForm')
 Route.post('password/email', 'Auth/PasswordResetController.sendResetLinkEmail')
 Route.get('password/reset/:token', 'Auth/PasswordResetController.showResetForm')
 Route.post('password/reset', 'Auth/PasswordResetController.reset')
+Route.group(()=> {
+  Route.get('/','FirmalarController.index').as('firmalar')
+  Route.get('yeni','FirmalarController.yeni').as('firmalar.yeni')
+  Route.post('kaydet','FirmalarController.kaydet').as('firmalar.kaydet')
+  Route.get('edit/:id','FirmalarController.edit').as('firmalar.edit')
+  Route.get('incele/:id','FirmalarController.incele').as('firmalar.incele')
+  Route.put(':id','FirmalarController.update').as('firmalar.update')
+  Route.delete(':id','FirmalarController.sil').as('firmalar.sil')
+}).prefix('firmalar').middleware(['auth'])
 
-//API
-Route.get('/api/firmalar','FirmalarController.apiListe').middleware(['auth'])
-
-
-Route.get('firmalar','FirmalarController.index').as('firmalar')
-Route.get('firmalar/yeni','FirmalarController.yeni').as('firmalar.yeni')
-Route.post('firmalar/kaydet','FirmalarController.kaydet').as('firmalar.kaydet')
-Route.get('firmalar/edit/:id','FirmalarController.edit').as('firmalar.edit')
-Route.get('firmalar/incele/:id','FirmalarController.incele').as('firmalar.incele')
-Route.put('/firmalar/:id','FirmalarController.update').as('firmalar.update')
-Route.delete('/firmalar/:id','FirmalarController.sil').as('firmalar.sil')
 Route.get('satislar','SatislarController.index')
 Route.get('alislar','AlislarController.index')
 Route.get('tahsilatlar','Tahsilatlarontroller.index')
