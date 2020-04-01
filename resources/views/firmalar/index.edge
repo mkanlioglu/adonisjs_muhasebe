@@ -18,20 +18,35 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
+                  @if(old('bilgi'))
+                    <div class="alert alert-info mt-1">
+                      {{ old('bilgi') }}
+                    </div>
+                  @endif  
                     <div class="card mb-4 mt-3">
-                        <div class="card-header"><i class="fas fa-chart-area mr-1"></i>
-                            {{ baslik }}
+                        <div class="card-header">
+                          <div class="row">
+                            <div class="col-auto mr-auto">
+                              <i class="fas fa-chart-area mr-1"></i>
+                              {{ baslik }}
+                            </div>
+                            <div class="col-auto">
+                            <a href="{{ route('firmalar.yeni') }}">
+                              <button class="btn-sm btn-primary"><i class="fas fa-plus mr-1"></i>Yeni</button>
+                            </a>
+                            </div>
+                          </div>    
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered" width="100%" cellspacing="0">
+                            <table class="table table-sm table-bordered" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Firma Adı</th>
-                                        <th>Vergi Dairesi</th>
                                         <th>Vergi No</th>
                                         <th>İş Tel</th>
                                         <th>Cep Tel</th>
+                                        <th style='width: 17%;'>İşlem</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,10 +54,17 @@
                                       <tr>
                                         <td>{{ firma.id }}</td>
                                         <td>{{ firma.firma_adi }}</td>
-                                        <td>{{ firma.vergi_dairesi }}</td>
                                         <td>{{ firma.vergi_no }}</td>
                                         <td>{{ firma.is_tel }}</td>
                                         <td>{{ firma.cep_tel }}</td>
+                                        <td>
+                                          <a href="{{ route('firmalar.edit', { id: firma.id }) }}">
+                                            <button class="btn btn-danger btn-sm" title="Kaydı Düzelt"><i class="fas fa-edit"></i> Düzelt</button>
+                                          </a>
+                                          <a href="{{ route('firmalar.incele', { id: firma.id }) }}">
+                                            <button class="btn btn-warning btn-sm" title="Kaydı İncele"><i class="fas fa-info-circle"></i> İncele</button>
+                                          </a>
+                                        </td>
                                       </tr>
                                     @endeach
                                 </tbody>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Muhasebe Sistemi</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+    @include('layout.navbar')
+    <div id="layoutSidenav">
+        @include('layout.sidebar')
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid">
+                    <div class="card mb-4 mt-3">
+                        <div class="card-header">
+                            <i class="fas fa-chart-area mr-1"></i>
+                           <b> {{ baslik }} </b>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('firmalar.kaydet') }}" method="POST">
+                                {{ csrfField() }}
+                                <div class="form-group">
+                                    <label for="firma_adi">Firma Adı</label>
+                                <input type="text" class="form-control" name="firma_adi" placeholder="Firma adı giriniz..." value="{{ old('firma_adi', '') }}">
+                                    {{ elIf('<span class="text-danger">$self</span>', getErrorFor('firma_adi'), hasErrorFor('firma_adi')) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="vergi_dairesi">Vergi Dairesi</label>
+                                    <input type="text" class="form-control" name="vergi_dairesi" placeholder="Vergi Dairesi giriniz...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="vergi_no">Vergi No</label>
+                                    <input type="text" class="form-control" name="vergi_no" placeholder="Vergi No giriniz...">
+                                    {{ elIf('<span class="text-danger">$self</span>', getErrorFor('vergi_no'), hasErrorFor('vergi_no')) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="is_tel">İş Tel</label>
+                                    <input type="text" class="form-control" name="is_tel" placeholder="İş Tel giriniz...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cep_tel">Cep Tel</label>
+                                    <input type="text" class="form-control" name="cep_tel" placeholder="Cep Tel giriniz...">
+                                </div>
+                                <a href="/firmalar"><button type="button" class="btn btn-danger">Vazgeç</button></a>
+                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                              </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    {{ script('https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js') }}
+    {{ script('js/scripts.js') }}
+</body>
+</html>
