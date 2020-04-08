@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Muhasebe Sistemi</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+    crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+  @include('layout.navbar')
+  <div id="layoutSidenav">
+    @include('layout.sidebar')
+    <div id="layoutSidenav_content">
+      <main>
+        <div class="container-fluid">
+          @if(old('bilgi'))
+          <div class="alert alert-info mt-1">
+            {{ old('bilgi') }}
+          </div>
+          @endif
+          <div class="card mb-4 mt-3">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                  <i class="fas fa-chart-area mr-1"></i>
+                  {{ baslik }}
+                </div>
+                <div class="col-auto">
+                  <a href="{{ route('satislar.yeni') }}">
+                    <button class="btn-sm btn-primary"><i class="fas fa-plus mr-1"></i>Yeni</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm table-bordered" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Tarih</th>
+                    <th>Firma Adı</th>
+                    <th>Tutar</th>
+                    <th style='width: 17%;'>İşlem</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @each(satis in data.data)
+                  <tr>
+                    <td>{{ satis.id }}</td>
+                    <td>{{ satis.tarih }}</td>
+                    <td>{{ satis.firmalars.firma_adi }}</td>
+                    <td>{{ satis.tutar }}</td>
+                    <td>
+                      <a href="{{ route('satislar.edit', { id: firma.id }) }}">
+                        <button class="btn btn-danger btn-sm" title="Kaydı Düzelt"><i class="fas fa-edit"></i>
+                          Düzelt</button>
+                      </a>
+                      <a href="{{ route('satislar.incele', { id: satis.id }) }}">
+                        <button class="btn btn-warning btn-sm" title="Kaydı İncele"><i class="fas fa-info-circle"></i>
+                          İncele</button>
+                      </a>
+                    </td>
+                  </tr>
+                  @endeach
+                </tbody>
+              </table>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                  @if(onceki > 0)
+                  <li class="page-item">
+                    <a class="page-link" href="http://localhost:3333/satislar" tabindex="-1">İlk</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="http://localhost:3333/satislar?page={{ onceki }}"
+                      tabindex="-1">Önceki</a>
+                  </li>
+                  <li class="page-item"><a class="page-link"
+                      href="http://localhost:3333/satislar?page={{ onceki }}">{{ onceki }}</a></li>
+                  @endif
+                  <li class="page-item active"><a class="page-link"
+                      href="http://localhost:3333/satislar?page={{ data.page }}">{{ data.page }}</a></li>
+                  @if(sonraki>0)
+                  <li class="page-item"><a class="page-link"
+                      href="http://localhost:3333/satislar?page={{ sonraki }}">{{ sonraki }}</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="http://localhost:3333/satislar?page={{ sonraki }}">Sonraki</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="http://localhost:3333/satislar?page={{ last }}" tabindex="-1">Son</a>
+                  </li>
+                  @endif
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+  {{ script('https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js') }}
+  {{ script('js/scripts.js') }}
+</body>
+
+</html>

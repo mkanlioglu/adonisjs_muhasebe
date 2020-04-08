@@ -41,7 +41,12 @@ Route.group(()=> {
   Route.delete(':id','FirmalarController.sil').as('firmalar.sil')
 }).prefix('firmalar').middleware(['auth'])
 
-Route.get('satislar','SatislarController.index')
+Route.group(()=> {
+  Route.get('/','SatislarController.index').as('satislar')
+  Route.get('yeni','SatislarController.yeni').as('satislar.yeni')
+  Route.post('kaydet','SatislarController.kaydet').as('satislar.kaydet')
+}).prefix('satislar').middleware(['auth'])
+
 Route.get('alislar','AlislarController.index')
 Route.get('tahsilatlar','Tahsilatlarontroller.index')
 Route.get('odemeler','OdemelerController.index')

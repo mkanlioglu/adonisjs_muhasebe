@@ -10,7 +10,7 @@ class FirmalarController {
         let length = 10;
         let onceki = Number(page) ? Number(page)-1 : 1;
         if(page>1){onceki=page-1}else{onceki=0}
-        const firmalar = await Firmalar.query().paginate(page,length);
+        const firmalar = await Firmalar.query().with('satislars').paginate(page,length);        
         const recordsTotal = await Firmalar.getCount();
         const last = Math.ceil(recordsTotal/length);
         if(page<last){sonraki=page+1}else{sonraki=0}
