@@ -7,7 +7,8 @@ class SatislarSchema extends Schema {
   up () {
     this.create('satislars', (table) => {
       table.increments()
-      table.string('firma_id')
+      table.integer('firmalar_id')
+      table.float('tutar')
       table.date('tarih')
       table.timestamps()
     })

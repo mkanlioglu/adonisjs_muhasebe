@@ -7,7 +7,7 @@ class TahsilatlarSchema extends Schema {
   up () {
     this.create('tahsilatlars', (table) => {
       table.increments()
-      table.string('firma_id')
+      table.integer('firmalar_id')
       table.date('tarih')
       table.float('tutar')
       table.string('aciklama',255)

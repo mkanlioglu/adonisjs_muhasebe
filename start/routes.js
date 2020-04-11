@@ -45,6 +45,10 @@ Route.group(()=> {
   Route.get('/','SatislarController.index').as('satislar')
   Route.get('yeni','SatislarController.yeni').as('satislar.yeni')
   Route.post('kaydet','SatislarController.kaydet').as('satislar.kaydet')
+  Route.get('edit/:id','SatislarController.edit').as('satislar.edit')
+  Route.get('incele/:id','SatislarController.incele').as('satislar.incele')
+  Route.put(':id','SatislarController.update').as('satislar.update')
+  Route.delete(':id','SatislarController.sil').as('satislar.sil')
 }).prefix('satislar').middleware(['auth'])
 
 Route.get('alislar','AlislarController.index')

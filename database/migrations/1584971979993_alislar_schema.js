@@ -7,7 +7,8 @@ class AlislarSchema extends Schema {
   up () {
     this.create('alislars', (table) => {
       table.increments()
-      table.string('firma_id')
+      table.integer('firmalar_id')
+      table.float('tutar')
       table.date('tarih')
       table.timestamps()
     })

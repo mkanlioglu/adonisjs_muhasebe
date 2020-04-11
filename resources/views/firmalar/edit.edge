@@ -50,12 +50,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-auto mr-auto">
-                                        <form action="{{ '/firmalar/' + firma.id + '?_method=DELETE' }}" method="POST">
-                                            <a href="{{ '/firmalar' }}" class="btn btn-danger"><i class="fas fa-trash mr-1"></i>Sil</a>
-                                        </form>
+                                        <a href="/firmalar"><button type="button" class="btn btn-danger">Vazgeç</button></a>
                                     </div>
                                     <div class="col-auto">
-                                        <a href="/firmalar"><button type="button" class="btn btn-danger">Vazgeç</button></a>
                                         <button type="submit" class="btn btn-primary">Kaydet</button>
                                     </div>
                                 </div>
@@ -70,5 +67,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     {{ script('https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js') }}
     {{ script('js/scripts.js') }}
+    <script>
+        $("#sil").click(function(event)
+        {
+        event.preventDefault();
+            var onay = confirm("Kayıt silinecek!");
+            if(onay){
+                document.getElementById("silForm").submit();
+            }
+        });
+    </script>
 </body>
 </html>

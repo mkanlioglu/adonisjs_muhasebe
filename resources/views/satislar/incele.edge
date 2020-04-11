@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body class="sb-nav-fixed">
     @include('layout.navbar')
@@ -25,16 +24,14 @@
                            <b> {{ baslik }} </b>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('satislar.kaydet') }}" method="POST">
-                                {{ csrfField() }}
                                 <div class="form-group">
                                     <label for="tarih">Tarih</label>
-                                    <input type="date" class="form-control" name="tarih" value="{{ old('tarih', '') }}" required>
+                                    <input type="text" class="form-control" name="tarih" value="{{ satis.tarih }}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="firma_id">Firma Adı</label>
-                                    <select name="firmalar_id" id="firmalar_id" class="form-control">
-                                        <option value="0">Firma seçiniz...</option>
+                                    <select name="firmalar_id" id="firma_id" class="form-control" disabled>
+                                        <option value="{{ satis.firmalar_id }}"></option>
                                         @each(firma in firmalar)
                                             <option value="{{ firma.id }}">{{ firma.firma_adi }}</option>
                                         @endeach
@@ -42,11 +39,24 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tutar">Tutar</label>
-                                    <input type="text" class="form-control" name="tutar" value="{{ old('tutar', '') }}" required>
+                                    <input type="text" class="form-control" name="tutar" value="{{ satis.tutar }}" disabled>
                                 </div>                                                                
-                                <a href="/satislar"><button type="button" class="btn btn-danger">Vazgeç</button></a>
-                                <button type="submit" class="btn btn-primary">Kaydet</button>
-                              </form>
+                                <div class="row">
+                                    <div class="col-auto mr-auto">
+                                        <form id="silForm" action="{{ '/satislar/' + satis.id + '?_method=DELETE' }}" method="POST">
+                                            {{ csrfField() }}
+                                            <button id="sil" class="btn btn-danger"><i class="fas fa-trash mr-1"></i>Sil</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="/satislar">
+                                            <button type="button" class="btn btn-warning">
+                                                <i class="fas fa-backward mr-1"></i>
+                                                Geri Dön
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -55,12 +65,16 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     {{ script('https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js') }}
     {{ script('js/scripts.js') }}
     <script>
-        $(document).ready(function() {
-            $('#firmalar_id').select2();
+        $("#sil").click(function(event)
+        {
+        event.preventDefault();
+            var onay = confirm("Kayıt silinecek!");
+            if(onay){
+                document.getElementById("silForm").submit();
+            }
         });
     </script>
 </body>
