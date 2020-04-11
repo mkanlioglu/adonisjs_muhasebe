@@ -38,8 +38,7 @@ class SatislarController {
     async kaydet({session, request,response }){
         
         const satis = new Satislar();
-        satis.tarih = request.input('tarih');
-        console.log(moment(satis.tarih).format('L'));
+        satis.tarih = moment(request.input('tarih')).format('YYYY-MM-DD')
         satis.firmalar_id = request.input('firmalar_id');
         satis.tutar = request.input('tutar');
         await satis.save();
@@ -52,7 +51,7 @@ class SatislarController {
         const firmalar = await Database.table('firmalars').select('*')
         const satisArray = await Satislar.query().where('id',params.id).with('firmalars').fetch();
         const satis = satisArray.toJSON()
-        satis[0].tarih = moment(satis[0].tarih).format('YYYY-MM-DD') 
+        satis[0].tarih = moment(satis[0].tarih).format('YYYY-MM-DD')
         return view.render('satislar.edit',{
             'baslik' : 'Satış Düzenle',
             satis : satis,
@@ -62,8 +61,9 @@ class SatislarController {
 
     async incele({view,params,request}){
 
-        const satis = await Satislar.find(params.id);
-        satis.tarih = moment(satis.tarih).format('YYYY-MM-DD');
+        const satisArray = await Satislar.query().where('id',params.id).with('firmalars').fetch();
+        const satis = satisArray.toJSON()
+        satis[0].tarih = moment(satis[0].tarih).format('YYYY-MM-DD')
         return view.render('satislar.incele',{
             'baslik' : 'Satış İncele',
             satis : satis

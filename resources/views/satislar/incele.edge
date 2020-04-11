@@ -26,20 +26,15 @@
                         <div class="card-body">
                                 <div class="form-group">
                                     <label for="tarih">Tarih</label>
-                                    <input type="text" class="form-control" name="tarih" value="{{ satis.tarih }}" disabled>
+                                    <input type="date" class="form-control" name="tarih" value="{{ satis[0].tarih }}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="firma_id">Firma Adı</label>
-                                    <select name="firmalar_id" id="firma_id" class="form-control" disabled>
-                                        <option value="{{ satis.firmalar_id }}"></option>
-                                        @each(firma in firmalar)
-                                            <option value="{{ firma.id }}">{{ firma.firma_adi }}</option>
-                                        @endeach
-                                    </select>
+                                    <input type="text" class="form-control" name="firma_id" value="{{ satis[0].firmalars.firma_adi }}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="tutar">Tutar</label>
-                                    <input type="text" class="form-control" name="tutar" value="{{ satis.tutar }}" disabled>
+                                    <input type="text" class="form-control" name="tutar" value="{{ satis[0].tutar }}" disabled>
                                 </div>                                                                
                                 <div class="row">
                                     <div class="col-auto mr-auto">
